@@ -3,27 +3,23 @@
 class TicTacToe:
     def __init__(self):
         self.board = [['' for _ in range(3)] for _ in range(3)]
-        self.current_turn = 'X'
+        self.current_player = 'X'  # X always goes first
 
     def reset_board(self):
         self.board = [['' for _ in range(3)] for _ in range(3)]
-
-    def print_board(self):
-        for row in self.board:
-            print("|".join(row))
-            print("-" * 5)
-
+        
     def make_move(self, row, col):
         if self.is_valid_move(row, col):
-            self.board[row][col] = self.current_turn
+            self.board[row][col] = self.current_player
+            self.toggle_player()  # After a move, switch to the other player
             return True
         return False
 
     def is_valid_move(self, row, col):
         return self.board[row][col] == ''
 
-    def toggle_turn(self):
-        self.current_turn = 'O' if self.current_turn == 'X' else 'X'
+    def toggle_player(self):
+        self.current_player = 'O' if self.current_player == 'X' else 'X'
 
     def check_winner(self):
         # Check rows, columns, and diagonals for a winner
@@ -39,4 +35,3 @@ class TicTacToe:
 
     def check_draw(self):
         return all(cell != '' for row in self.board for cell in row)
-

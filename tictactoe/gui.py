@@ -2,6 +2,8 @@
 
 import tkinter as tk
 from .game import TicTacToe
+from tkinter import messagebox
+
 
 class TicTacToeGUI:
     def __init__(self, root):
@@ -21,12 +23,21 @@ class TicTacToeGUI:
     def make_move(self, row, col):
         if self.game.make_move(row, col):
             self.buttons[row][col]['text'] = self.game.current_player
-            if self.game.has_winner():
-                # Handle the winner situation
+            if self.game.check_winner():
+                messagebox.showinfo("Game Over", f"Player {self.game.current_player} wins!")
+                self.game.reset_board()
+                self.clear_buttons()
                 pass
-            elif self.game.is_draw():
-                # Handle the draw situation
+            elif self.game.check_draw():
+                messagebox.showinfo("Game Over", "It's a draw!")
+                self.game.reset_board()  
+                self.clear_buttons()
                 pass
+
+    def clear_buttons(self):
+        for row in range(len(self.buttons)):
+            for col in range(len(self.buttons[row])):
+                self.buttons[row][col]['text'] = ''
 
 if __name__ == "__main__":
     root = tk.Tk()

@@ -9,13 +9,6 @@ tictactoe
 
 Tic Tac Toe in Python vs AI
 
-
-
-Features
---------
-
-* TODO
-
 Credits
 -------
 
